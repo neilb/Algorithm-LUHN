@@ -4,7 +4,7 @@ use strict;
 use Test;
 use Algorithm::LUHN qw/check_digit is_valid  valid_chars/;
 
-BEGIN { plan tests => 21 }
+BEGIN { plan tests => 27 }
 
 # Check some numeric and alphanumeric values
 
@@ -18,9 +18,11 @@ while (@values) {
   ok($c, $expected, "check_digit($v): expected $expected; got $c\n");
   ok(is_valid("$v$c"));
   ok(!is_valid("$v".(9-$c)));
+  ok($Algorithm::LUHN::ERROR, qr/^Check digit/,
+     "  Did not get the expected error. Got $Algorithm::LUHN::ERROR\n");
 }
 
-# Check a value including alphas (should fail).
+# Check a value including non-alphanum char (should fail).
 my ($v, $c);
 $v = '016783A@';
 ok(!($c=check_digit($v)));

@@ -9,7 +9,7 @@ use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK $ERROR/;
 @EXPORT    = qw//;
 @EXPORT_OK = qw/check_digit is_valid valid_chars/;
 
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 # The hash of valid characters.
 my %map = map { $_ => $_ } 0..9;
@@ -43,7 +43,7 @@ Algorithm::LUHN - Calculate the Modulus 10 Double Add Double checksum
 
 This module calculates the Modulus 10 Double Add Double checksum, also known as
 the LUHN Formula. This algorithm is used to verify credit card numbers and
-Standard & Poor's security identifiers such as CUSIP's and ISIN's.
+Standard & Poor's security identifiers such as CUSIP's and CSIN's.
 
 You can find plenty of information about the algorithm by searching the web for
 "modulus 10 double add double".
@@ -56,10 +56,11 @@ You can find plenty of information about the algorithm by searching the web for
 
 =item is_valid CHECKSUMMED_NUM
 
-This function returns 1 if the final character of CHECKSUMMED_NUM is the
-correct checksum for the rest of the number and 0 if not. The final character
-does not factor into the checksum calculation. If the NUM contains an invalid
-character, undef will be returned and $Algorithm::LUHN::ERROR will contain the
+This function returns true if the final character of CHECKSUMMED_NUM is the
+correct checksum for the rest of the number and false if not. Obviously the
+final character does not factor into the checksum calculation. False will also
+be returned if NUM contains in an invalid character as defined by
+valid_chars(). If NUM is not valid, $Algorithm::LUHN::ERROR will contain the
 reason.
 
 This function is equivalent to
@@ -71,10 +72,15 @@ sub is_valid {
   my $N = shift;
   my $c = check_digit(substr($N, 0,length($N)-1));
   if (defined $c) {
-    return (substr($N,length($N)-1, 1) eq $c);
+    if (substr($N,length($N)-1, 1) eq $c) {
+      return 1;
+    } else {
+      $ERROR = "Check digit not correct. Expected $c";
+      return '';
+    }
   } else {
     # $ERROR will have been set by check_digit
-    return;
+    return '';
   }
 }
 
@@ -105,8 +111,7 @@ sub check_digit {
     }
   }
 
-  my $rem = $totalVal % 10;
-  return $rem && 10 - $rem;
+  return (10 - $totalVal % 10) % 10;
 }
 
 =item valid_chars LIST
