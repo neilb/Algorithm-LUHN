@@ -1,0 +1,5 @@
+Version 0.12
+
+  05/02/01 - Replaced the ill-conceived C<die> call in check_digit with the
+    $ERROR variable that contains the reason for the "failure."
+

@@ -3,13 +3,16 @@ package Algorithm::LUHN;
 use strict;
 use Exporter;
 
-use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK/;
+use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK $ERROR/;
 
 @ISA       = qw/Exporter/;
 @EXPORT    = qw//;
 @EXPORT_OK = qw/check_digit is_valid valid_chars/;
 
-$VERSION = '0.10';
+$VERSION = '0.12';
+
+# The hash of valid characters.
+my %map = map { $_ => $_ } 0..9;
 
 =pod
 
@@ -51,13 +54,13 @@ You can find plenty of information about the algorithm by searching the web for
 
 =cut
 
-my %map = map { $_ => $_ } 0..9;
-
 =item is_valid CHECKSUMMED_NUM
 
-This function returns true if the final character of CHECKSUMMED_NUM is the
-correct checksum for the rest of the number. The final character does not
-factor into the checksum calculation.
+This function returns 1 if the final character of CHECKSUMMED_NUM is the
+correct checksum for the rest of the number and 0 if not. The final character
+does not factor into the checksum calculation. If the NUM contains an invalid
+character, undef will be returned and $Algorithm::LUHN::ERROR will contain the
+reason.
 
 This function is equivalent to
 
@@ -66,12 +69,20 @@ This function is equivalent to
 =cut
 sub is_valid {
   my $N = shift;
-  return substr($N,length($N)-1, 1) eq check_digit(substr($N, 0,length($N)-1));
+  my $c = check_digit(substr($N, 0,length($N)-1));
+  if (defined $c) {
+    return (substr($N,length($N)-1, 1) eq $c);
+  } else {
+    # $ERROR will have been set by check_digit
+    return;
+  }
 }
 
 =item check_digit NUM
 
-This function returns the checksum of the given number.
+This function returns the checksum of the given number. If it cannot calculate
+the check_digit it will return undef and set $Algorithm::LUHN::ERROR to contain
+the reason why.
 
 =cut
 sub check_digit {
@@ -80,8 +91,10 @@ sub check_digit {
   my $totalVal = 0;
   my $flip = 1;
   foreach my $c (@buf) {
-    die "Invalid character, '$c', in LUHN::check_digit calculation"
-      unless exists $map{$c};
+    unless (exists $map{$c}) {
+      $ERROR = "Invalid character, '$c', in check_digit calculation";
+      return;
+    }
     my $posVal = $map{$c};
 
     $posVal *= 2 unless $flip = !$flip;
@@ -139,7 +152,7 @@ __END__
 =head1 AUTHOR
 
 This module was written by
-Tim Ayers (http://search.cpan.org/search?mode=author&query=tayers).
+Tim Ayers (http://search.cpan.org/search?author=TAYERS).
 
 =head1 COPYRIGHT
 

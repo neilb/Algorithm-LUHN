@@ -1,4 +1,5 @@
 MANIFEST
+CHANGES
 LUHN.pm
 README
 Makefile.PL
