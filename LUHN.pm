@@ -9,7 +9,7 @@ use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK $ERROR/;
 @EXPORT    = qw//;
 @EXPORT_OK = qw/check_digit is_valid valid_chars/;
 
-$VERSION = '0.13';
+$VERSION = '1.00';
 
 # The hash of valid characters.
 my %map = map { $_ => $_ } 0..9;
@@ -75,7 +75,7 @@ sub is_valid {
     if (substr($N,length($N)-1, 1) eq $c) {
       return 1;
     } else {
-      $ERROR = "Check digit not correct. Expected $c";
+      $ERROR = "Check digit incorrect. Expected $c";
       return '';
     }
   } else {
