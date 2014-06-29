@@ -55,7 +55,10 @@ You can find plenty of information about the algorithm by searching the web for
 
 =item is_valid CHECKSUMMED_NUM
 
-This function returns true if the final character of CHECKSUMMED_NUM is the
+This function takes a credit-card number and returns true if
+the number passes the LUHN check.
+
+Ie it returns true if the final character of CHECKSUMMED_NUM is the
 correct checksum for the rest of the number and false if not. Obviously the
 final character does not factor into the checksum calculation. False will also
 be returned if NUM contains in an invalid character as defined by
@@ -66,7 +69,16 @@ This function is equivalent to
 
   substr $N,length($N)-1 eq check_digit(substr $N,0,length($N)-1)
 
+For example, C<4242 4242 4242 4242> is a valid Visa card number,
+that is provided for test purposes. The final digit is '2',
+which is the right check digit. If you change it to a '3', it's not
+a valid card number. Ie:
+
+    is_valid('4242424242424242');   # true
+    is_valid('4242424242424243');   # false
+
 =cut
+
 sub is_valid {
   my $N = shift;
   my $c = check_digit(substr($N, 0,length($N)-1));
