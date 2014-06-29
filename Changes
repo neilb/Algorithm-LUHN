@@ -3,6 +3,7 @@ Revision history for Perl module Algorithm::LUHN
 1.01 2014-06-30 NEILB
 
     - Renamed CHANGES to Changes and reformatted as per CPAN::Changes::Spec
+    - Moved LUHN.pm to lib/Algorithm/LUHN.pm, as per convention
 
 1.00 2002-03-26 TAYERS
 
