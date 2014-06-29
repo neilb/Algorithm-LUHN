@@ -1,15 +1,14 @@
 package Algorithm::LUHN;
 
+use 5.006;
 use strict;
+use warnings;
 use Exporter;
 
-use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK $ERROR/;
-
-@ISA       = qw/Exporter/;
-@EXPORT    = qw//;
-@EXPORT_OK = qw/check_digit is_valid valid_chars/;
-
-$VERSION = '1.00';
+our @ISA       = qw/Exporter/;
+our @EXPORT    = qw//;
+our @EXPORT_OK = qw/check_digit is_valid valid_chars/;
+our $ERROR;
 
 # The hash of valid characters.
 my %map = map { $_ => $_ } 0..9;
