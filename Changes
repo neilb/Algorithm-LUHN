@@ -2,6 +2,7 @@ Revision history for Perl module Algorithm::LUHN
 
 1.01 2014-06-30 NEILB
 
+    - Added SEE ALSO section with links to other LUHN modules.
     - Renamed CHANGES to Changes and reformatted as per CPAN::Changes::Spec
     - Moved LUHN.pm to lib/Algorithm/LUHN.pm, as per convention
     - Switched to Dist::Zilla and set min perl version to 5.006

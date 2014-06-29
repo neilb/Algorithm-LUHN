@@ -153,6 +153,29 @@ sub _dump_map {
 
 __END__
 
+=head1 SEE ALSO
+
+L<Algorithm::CheckDigits> provides a front-end to a large collection
+of modules for working with check digits.
+
+L<Business::CreditCard> provides three functions for checking credit
+card numbers. L<Business::CreditCard::Object> provides an OO interface
+to those functions.
+
+L<Business::CardInfo> provides a class for holding credit card details,
+and has a type constraint on the card number, to ensure it passes the
+LUHN check.
+
+L<Business::CCCheck> provides a number of functions for checking
+credit card numbers.
+
+L<Regexp::Common> supports combined LUHN and issuer checking
+against a card number.
+
+I have also written a
+L<review of LUHN modules|http://neilb.org/reviews/luhn.html>,
+which covers them in more detail than this section.
+
 =head1 REPOSITORY
 
 L<https://github.com/neilbowers/Algorithm-LUHN>
