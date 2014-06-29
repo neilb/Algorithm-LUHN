@@ -153,6 +153,10 @@ sub _dump_map {
 
 __END__
 
+=head1 REPOSITORY
+
+L<https://github.com/neilbowers/Algorithm-LUHN>
+
 =head1 AUTHOR
 
 This module was written by
