@@ -3,6 +3,8 @@ Revision history for Perl module Algorithm::LUHN
 1.02 2014-06-30 NEILB
     - Updated github repo URL after changing my github username
     - Added Algorithm::Damm and Math::CheckDigits to SEE ALSO
+    - Fixed errors in pod: using c<...> instead of C<...> and
+      not escaping the > character.
 
 1.01 2014-06-30 NEILB
 

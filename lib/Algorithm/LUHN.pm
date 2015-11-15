@@ -132,17 +132,18 @@ you want to consider other characters as valid, e.g. Standard & Poor's
 identifers may contain 0..9, A..Z, @, #, *. This function allows you to add
 additional characters to the accepted list.
 
-LIST is a mapping of c<character> => c<value>. For example, Standard & Poor's
-maps A..Z to 10..35 so the LIST to add these valid characters would be (A, 10,
-B, 11, C, 12, ...)
+LIST is a mapping of C<character> =E<gt> C<value>.
+For example, Standard & Poor's maps A..Z to 10..35
+so the LIST to add these valid characters would be (A, 10, B, 11, C, 12, ...)
 
 Please note that this I<adds> or I<re-maps> characters, so any characters
 already considered valid but not in LIST will remain valid.
 
-If you do not provide LIST, this function returns the current valid character
-map.
+If you do not provide LIST,
+this function returns the current valid character map.
 
 =cut
+
 sub valid_chars {
   return %map unless @_;
   while (@_) {
