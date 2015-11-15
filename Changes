@@ -5,6 +5,7 @@ Revision history for Perl module Algorithm::LUHN
     - Added Algorithm::Damm and Math::CheckDigits to SEE ALSO
     - Fixed errors in pod: using c<...> instead of C<...> and
       not escaping the > character.
+    - Added [MetaJSON] to dist.ini so META.json is included in releases
 
 1.01 2014-06-30 NEILB
 
