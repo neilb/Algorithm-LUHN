@@ -190,7 +190,7 @@ which covers them in more detail than this section.
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/Algorithm-LUHN>
+L<https://github.com/neilb/Algorithm-LUHN>
 
 =head1 AUTHOR
 
