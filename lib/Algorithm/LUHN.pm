@@ -184,6 +184,12 @@ credit card numbers.
 L<Regexp::Common> supports combined LUHN and issuer checking
 against a card number.
 
+L<Algorithm::Damm> implements a different kind of check digit algorithm,
+the L<Damm algorithm|https://en.wikipedia.org/wiki/Damm_algorithm>
+(Damm, not Damn).
+
+L<Math::CheckDigits> implements yet another approach to check digits.
+
 I have also written a
 L<review of LUHN modules|http://neilb.org/reviews/luhn.html>,
 which covers them in more detail than this section.
